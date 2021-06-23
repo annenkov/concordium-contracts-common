@@ -585,7 +585,7 @@ impl convert::AsRef<[u8]> for AccountAddress {
 }
 
 /// Address of a contract.
-#[derive(Eq, PartialEq, Copy, Clone, Debug)]
+#[derive(Eq, PartialEq, Copy, Clone, Debug, PartialOrd, Ord)]
 #[cfg_attr(feature = "derive-serde", derive(SerdeSerialize, SerdeDeserialize))]
 #[cfg_attr(feature = "fuzz", derive(Arbitrary))]
 pub struct ContractAddress {
@@ -599,8 +599,8 @@ pub struct ContractAddress {
     derive(SerdeSerialize, SerdeDeserialize),
     serde(tag = "type", content = "address", rename_all = "lowercase")
 )]
-#[cfg_attr(feature = "fuzz", derive(Arbitrary, Debug))]
-#[derive(PartialEq, Eq, Copy, Clone)]
+#[cfg_attr(feature = "fuzz", derive(Arbitrary))]
+#[derive(PartialEq, Eq, Copy, Clone, PartialOrd, Ord, Debug)]
 pub enum Address {
     Account(AccountAddress),
     Contract(ContractAddress),
